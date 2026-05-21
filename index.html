@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz Aniversário Minha Marmotinha!</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(135deg,#ffd6e7,#ffeef5,#f0d9ff);
+    overflow-x:hidden;
+    text-align:center;
+}
+
+h1{
+    font-family:'Pacifico',cursive;
+    font-size:3rem;
+    color:#ff2e88;
+    margin-top:60px;
+    text-shadow:0 0 10px #ff9ac7,0 0 20px #fff;
+}
+
+h2{
+    margin-top:40px;
+    color:#6b1e5b;
+}
+
+.motivos{
+    max-width:800px;
+    margin:auto;
+    padding:20px;
+}
+
+.motivo{
+    background:white;
+    margin:8px;
+    padding:12px;
+    border-radius:12px;
+    box-shadow:0 0 10px rgba(255,105,180,0.3);
+}
+
+.heart{
+    position:fixed;
+    top:-10px;
+    font-size:20px;
+    animation:fall linear infinite;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(110vh);
+        opacity:0;
+    }
+}
+.envelope{
+    width:320px;
+    height:220px;
+    background:#ff6fa5;
+    margin:40px auto;
+    position:relative;
+    cursor:pointer;
+    border-radius:16px;
+    box-shadow:0 15px 30px rgba(0,0,0,0.25);
+    transition:0.5s;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+}
+
+/* Tampa da carta */
+.flap{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:#ff4f93;
+    clip-path:polygon(0 0,100% 0,50% 60%);
+    transform-origin:top;
+    transition:0.6s;
+    z-index:2;
+}
+
+/* Texto da carta */
+.carta-texto{
+    position:relative;
+    padding:20px;
+    opacity:0;
+    transform:translateY(20px);
+    transition:0.6s;
+    font-size:15px;
+    color:#5a0044;
+    font-family:'Pacifico',cursive;
+    line-height:1.5;
+    text-align:center;
+    z-index:1;
+}
+
+/* Ao abrir */
+.envelope.open .flap{
+    transform:rotateX(180deg);
+}
+
+.envelope.open .carta-texto{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* Glow mais bonito */
+.envelope:hover{
+    box-shadow:0 0 25px #ff00aa,0 0 60px #ff77cc;
+    transform:scale(1.03);
+}
+
+
+
+
+/* AREA DAS MUSICAS */
+.musicas-container{
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+    align-items:center;
+    margin:50px auto;
+    max-width:700px;
+}
+
+.musica-card{
+    background:white;
+    width:90%;
+    padding:20px;
+    border-radius:20px;
+    box-shadow:0 0 15px rgba(255,105,180,0.25);
+}
+
+.musica-card h3{
+    color:#ff2e88;
+    margin-bottom:18px;
+}
+
+
+
+
+.spotify-player{
+    background:linear-gradient(135deg,#ff8fc7,#ff5fa2,#d96dff);
+    border-radius:22px;
+    padding:20px;
+    display:flex;
+    align-items:center;
+    gap:18px;
+    transition:0.4s;
+    box-shadow:
+    0 0 15px rgba(255,105,180,0.35),
+    0 0 35px rgba(255,0,140,0.2);
+    border:2px solid rgba(255,255,255,0.4);
+    position:relative;
+    overflow:hidden;
+}
+
+.spotify-player::before{
+    content:'';
+    position:absolute;
+    width:200%;
+    height:200%;
+    background:rgba(255,255,255,0.08);
+    transform:rotate(25deg);
+    top:-120%;
+    left:-120%;
+    transition:0.7s;
+}
+
+.spotify-player:hover::before{
+    top:0;
+    left:0;
+}
+
+.spotify-player:hover{
+    transform:scale(1.03);
+    box-shadow:
+    0 0 25px rgba(255,0,140,0.5),
+    0 0 60px rgba(255,105,180,0.35);
+}
+
+/* BOTAO PLAY */
+.play-btn{
+    width:68px;
+    height:68px;
+    border:none;
+    border-radius:50%;
+    background:linear-gradient(135deg,#ff2e88,#ff77cc);
+    color:white;
+    font-size:24px;
+    cursor:pointer;
+    transition:0.35s;
+    box-shadow:
+    0 0 12px rgba(255,0,140,0.45),
+    inset 0 0 10px rgba(255,255,255,0.25);
+    font-weight:bold;
+}
+
+.play-btn:hover{
+    transform:scale(1.12) rotate(8deg);
+    box-shadow:
+    0 0 25px #ff2e88,
+    0 0 45px #ff77cc;
+}
+
+/* TEXOS */
+.music-title{
+    color:white;
+    font-weight:600;
+    font-size:1.05rem;
+    text-shadow:0 0 8px rgba(255,255,255,0.3);
+}
+
+.music-artist{
+    color:#ffe3f3;
+    font-size:0.92rem;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<h1>Feliz aniversario Minha Marmotinha!</h1>
+
+<!-- CARTA AGORA FICA AQUI -->
+<div class="envelope" onclick="abrirCarta(this)">
+    <div class="flap"></div>
+    <div class="carta-texto">
+        Feliz aniversario minha princesa, saiba que você é a melhor coisa que ja me aconteceu, amo seu jeitinho irritadinha e ciumenta que me faz sentir especial, amo seu toque e seu olhar marcante, espero continuar ao seu lado para sempre 👩🏾‍❤️‍👨🏻
+    </div>
+</div>
+
+<h2>Motivos Do Porque Eu Te Amo</h2>
+
+<div class="motivos" id="motivos"></div>
+
+<audio id="musica" loop>
+    <source src="alianca.mp3" type="audio/mp3">
+</audio>
+
+<script>
+const motivosLista = [
+"Porque voce me faz feliz",
+"Porque voce me faz sentir especial",
+"Porque porque voce é fofa comigo",
+"Porque voce me faz rir",
+"Porque é com voce que eu quero estar",
+"Porque eu posso ser eu mesmo com voce",
+"Porque seu olhar me apaixona",
+"Porque seu cabelo me seduz",
+"Porque eu amo seu toque",
+"Porque seu abraço e meu lugar preferido",
+"Porque seu sorriso lindo",
+"Porque seu riso é motivo da minha risada",
+"Porque voce me faz querer ser melhor",
+"Porque voce é a garota dos meus sonhos",
+"Porque amo seu jeitinho",
+"Porque voce é sincera",
+"Porque voce é ciumenta",
+"Porque porque voce é sensível",
+"Porque amo nossas conversas",
+"Porque voce é bobinha",
+"Porque voce é compreensivel",
+"Porque nos somos parecidos",
+"Porque voce é diferente das outras garotas",
+"Porque voce é unica",
+"Porque seu carinho é tudo pra min",
+"Porque amo seus olhos",
+"Porque amo seu rostinho",
+"Porque amo seu cabelo de sereia",
+"Porque amo suas coxas que me chamam toda vez",
+"Porque amo sua provocação",
+"Porque amo te tocar",
+"Porque amo suas maos",
+"Porque amo sua pele macia",
+"Porque voce me fala sobre seu dia",
+"Porque eu te desejo",
+"Porque voce se moldou por min",
+"Porque voce é engraçada",
+"Porque voce é linda",
+"Porque voce é muito especial pra min",
+"Porque meu humor depende de voce",
+"Porque na quimica voce é meu O2",
+"Porque na matematica voce é minha solução.",
+"Porque na biologia voce é meu coração",
+"Porque na geografia voce meu mundo",
+"Porque na astronomia voce é meu universo",
+"Porque na historia voce é meu passado, presente e futuro",
+"Porque na fisica voce é a força que me move",
+"Porque no portugues voce é o significado das minhas palavras",
+"Porque na filosofia voce é o sentido da minha existencia",
+"Porque na arte voce é minha inspiração",
+"Porque na educação fisica voce acerela meus batimentos",
+"Porque na programação voce é meu codigo sem erro",
+"Porque no ingles i love you too much",
+"Porque em espanhol te amo demasiado",
+"Porque voce me faz sentir amor",
+"Porque valorizo o pouco tempo que passamos juntos",
+"Porque voce se abre comigo",
+"Porque contigo n preciso me calar",
+"Porque gosto da sua compania",
+"Porque voce me conta tudo",
+"Porque compartilha segredos comigo",
+"Porque me olha com carinho",
+"Porque gosto de ficar com voce",
+"Porque ate no silencio nos entendemos",
+"Porque gosto sempre de estar encostando em voce",
+"Porque voce é minha marmotinha",
+"Porque voce é minha princesa",
+"Porque voce é simplesmente voce",
+
+];
+
+const lista = document.getElementById('motivos');
+
+motivosLista.forEach((motivo) => {
+    const div = document.createElement('div');
+    div.className = 'motivo';
+    div.innerText = motivo;
+    lista.appendChild(div);
+});
+function abrirCarta(el){
+
+    el.classList.toggle('open');
+
+    const musicaAutomatica = document.getElementById("musica");
+
+    // toca a música quando abrir a carta
+    if(el.classList.contains("open")){
+        musicaAutomatica.play()
+        .catch(err => console.log("Autoplay bloqueado:", err));
+    }else{
+        musicaAutomatica.pause();
+    }
+}
+
+function criarCoracao(){
+    const heart=document.createElement('div');
+    heart.classList.add('heart');
+    heart.innerHTML='❤️';
+    heart.style.left=Math.random()*100+'vw';
+    heart.style.animationDuration=(Math.random()*3+2)+'s';
+    document.body.appendChild(heart);
+
+    setTimeout(()=>heart.remove(),5000);
+}
+setInterval(criarCoracao,300);
+
+</script>
+
+
+
+
+
+<script>
+
+function toggleMusica(id, botao){
+
+    const musicaAutomatica = document.getElementById("musica");
+    const musica = document.getElementById(id);
+
+    // pausa musica automática
+    musicaAutomatica.pause();
+
+    // pausa todas as outras
+    document.querySelectorAll("audio").forEach(a => {
+        if(a !== musica){
+            a.pause();
+            a.currentTime = 0;
+        }
+    });
+
+    // reseta botoes
+    document.querySelectorAll(".play-btn").forEach(btn => {
+        btn.innerHTML = '▶';
+    });
+
+    // toca ou pausa
+    if(musica.paused){
+
+        musica.play()
+        .then(() => {
+            botao.innerHTML = '❚❚';
+        })
+        .catch(err => {
+            console.log("Erro ao tocar:", err);
+        });
+
+    }else{
+        musica.pause();
+        botao.innerHTML = '▶';
+    }
+}
+
+</script>
+
+
+
+<!-- AREA DAS MUSICAS -->
+<h2>Nossas Musicas 🎵</h2>
+
+<div class="musicas-container">
+
+    <!-- SUA MUSICA PARA ELA -->
+    <div class="musica-card">
+        <h3>Minha musica para voce 💖</h3>
+
+        <div class="spotify-player">
+          <button class="play-btn" onclick="toggleMusica('musica1', this)"></button>
+                ▶
+            </button>
+
+            <div class="music-info">
+    <span class="music-title">Pra Dama</span>
+    <span class="music-artist">Oriente</span>
+</div>
+
+</div>
+        </div>
+
+        <!-- TROQUE O ARQUIVO DEPOIS -->
+        <audio id="musica1">
+            <source src="oriente.mp3" type="audio/mp3">
+        </audio>
+    </div>
+
+    <!-- MUSICA DO CASAL -->
+    <div class="musica-card">
+        <h3>Nossa musica 💞</h3>
+
+        <div class="spotify-player">
+            <button class="play-btn" onclick="toggleMusica('musica2', this)"></button>
+                ▶
+            </button>
+
+            <div class="music-info">
+    <span class="music-title">O mundo é nosso</span>
+    <span class="music-artist">Duduzinho</span>
+</div>
+
+</div>
+        </div>
+
+        <!-- TROQUE O ARQUIVO DEPOIS -->
+        <audio id="musica2">
+            <source src="mundo.mp3" type="audio/mp3">
+        </audio>
+    </div>
+
+
+<!-- MUSICA QUE ME LEMBRA VOCE -->
+<div class="musica-card">
+    <h3>A musica que me lembra voce 🌹</h3>
+
+    <div class="spotify-player">
+      <button class="play-btn" onclick="toggleMusica('musica3', this)"></button>
+            ▶
+        </button>
+
+        <div class="music-info">
+    <span class="music-title">Obsessed</span>
+    <span class="music-artist">Mariah Carey</span>
+</div>
+
+</div>
+    </div>
+
+    <!-- TROQUE O ARQUIVO DEPOIS -->
+    <audio id="musica3">
+        <source src="obsessed.mp3" type="audio/mp3">
+    </audio>
+
+<div id="contadorAmor" style="font-size:1.3rem;color:#a0006b;margin-bottom:60px;font-weight:600;"></div>
+
+<script>
+const inicioAmor = new Date('2026-03-22T13:10:00');
+
+function atualizarContador(){
+    const agora = new Date();
+    const diff = agora - inicioAmor;
+
+    const segundos = Math.floor(diff/1000)%60;
+    const minutos = Math.floor(diff/(1000*60))%60;
+    const horas = Math.floor(diff/(1000*60*60))%24;
+    const dias = Math.floor(diff/(1000*60*60*24));
+
+    document.getElementById('contadorAmor').innerText =
+    `Eu te Amo a: ${dias} dias, ${horas} horas, ${minutos} minutos e ${segundos} segundos ❤️`;
+}
+
+setInterval(atualizarContador,1000);
+atualizarContador();
+
+function criarRosa(){
+    const rosa=document.createElement('div');
+    rosa.innerHTML='🌹';
+    rosa.style.position='fixed';
+    rosa.style.fontSize='28px';
+    rosa.style.opacity='0.25';
+    rosa.style.pointerEvents='none';
+    rosa.style.left=Math.random()*100+'vw';
+    rosa.style.top=Math.random()*100+'vh';
+    rosa.style.transition='3s ease';
+    document.body.appendChild(rosa);
+
+    setTimeout(()=>{ rosa.style.opacity='0'; },2000);
+    setTimeout(()=>rosa.remove(),5000);
+}
+
+setInterval(criarRosa,4000);
+</script>
+
+</body>
+</html>>
