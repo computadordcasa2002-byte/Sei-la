@@ -226,7 +226,35 @@ h2{
 </head>
 
 <body>
+<!-- TELA DE ABERTURA -->
+<div id="intro">
 
+    <div class="intro-box">
+
+        <h1 class="intro-title">💖 Bem-vinda Meu Bem 💖</h1>
+
+        <p class="intro-text">
+            Antes de entrar no nosso cantinho...
+        </p>
+
+        <input type="password" id="senha" placeholder="Digite a senha">
+
+        <p class="dica">
+            Dica: A senha é seu apelido que eu mais gosto 💌
+        </p>
+
+        <button onclick="verificarSenha()">
+            Entrar
+        </button>
+
+        <p id="erroSenha"></p>
+
+    </div>
+
+</div>
+
+<!-- CONTEUDO DO SITE -->
+<div id="conteudoSite">
 <h1>Feliz aniversario Minha Marmotinha!</h1>
 
 <!-- CARTA AGORA FICA AQUI -->
@@ -355,7 +383,105 @@ setInterval(criarCoracao,300);
 
 </script>
 
+<style>
 
+
+/* INTRO */
+
+#intro{
+    position:fixed;
+    inset:0;
+    background:
+    linear-gradient(135deg,#ffb6d9,#ffd6e7,#f3d1ff);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+    animation:fadeEntrada 2s ease;
+}
+
+.intro-box{
+    background:rgba(255,255,255,0.25);
+    backdrop-filter:blur(12px);
+    padding:40px;
+    border-radius:25px;
+    box-shadow:0 0 30px rgba(255,0,140,0.3);
+    text-align:center;
+    width:90%;
+    max-width:420px;
+}
+
+.intro-title{
+    color:#ff2e88;
+    font-size:2.5rem;
+    margin-bottom:15px;
+    text-shadow:0 0 10px white;
+}
+
+.intro-text{
+    color:#6b1e5b;
+    margin-bottom:25px;
+    font-size:1.05rem;
+}
+
+#senha{
+    width:80%;
+    padding:14px;
+    border:none;
+    border-radius:14px;
+    outline:none;
+    font-size:1rem;
+    text-align:center;
+    margin-bottom:12px;
+}
+
+.dica{
+    color:#8b3a74;
+    font-size:0.95rem;
+    margin-bottom:20px;
+}
+
+.intro-box button{
+    border:none;
+    padding:14px 30px;
+    border-radius:16px;
+    background:linear-gradient(135deg,#ff2e88,#ff77cc);
+    color:white;
+    font-size:1rem;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.intro-box button:hover{
+    transform:scale(1.06);
+    box-shadow:0 0 20px #ff77cc;
+}
+
+#erroSenha{
+    color:#d1005d;
+    margin-top:15px;
+    font-weight:bold;
+}
+
+/* SITE COMEÇA ESCONDIDO */
+#conteudoSite{
+    display:none;
+}
+
+/* ANIMAÇÃO */
+@keyframes fadeEntrada{
+    from{
+        opacity:0;
+    }
+
+    to{
+        opacity:1;
+    }
+}
+
+
+
+</style>
 
 
 
@@ -400,6 +526,38 @@ function toggleMusica(id, botao){
 
     }
 }
+
+
+
+
+function verificarSenha(){
+
+    const senha = document.getElementById("senha").value.toLowerCase();
+
+    if(senha === "marmotinha"){
+
+        const intro = document.getElementById("intro");
+
+        intro.style.transition = "1s";
+        intro.style.opacity = "0";
+
+        setTimeout(() => {
+
+            intro.style.display = "none";
+
+            document.getElementById("conteudoSite").style.display = "block";
+
+        },1000);
+
+    }else{
+
+        document.getElementById("erroSenha").innerText =
+        "Senha incorreta 💔";
+
+    }
+}
+
+
 
 
 </script>
@@ -520,6 +678,6 @@ function criarRosa(){
 
 setInterval(criarRosa,4000);
 </script>
-
+</div>
 </body>
 </html>
